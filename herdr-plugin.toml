@@ -23,3 +23,8 @@ command = ["sh", "open.sh", "right"]
 id = "open-below"
 title = "code-tree below this agent"
 command = ["sh", "open.sh", "down"]
+
+[[actions]]
+id = "open-tab"
+title = "code-tree in a new tab"
+command = ["sh", "open.sh", "tab"]

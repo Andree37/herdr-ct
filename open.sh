@@ -5,6 +5,10 @@ herdr="${HERDR_BIN_PATH:-herdr}"
 pane="$HERDR_PANE_ID"
 cwd=$("$herdr" pane get "$pane" 2>/dev/null | sed -n 's/.*"foreground_cwd":"\([^"]*\)".*/\1/p')
 [ -n "$cwd" ] || cwd=$("$herdr" pane get "$pane" 2>/dev/null | sed -n 's/.*"cwd":"\([^"]*\)".*/\1/p')
+if [ "$1" = tab ]; then
+    exec "$herdr" plugin pane open --plugin andree37.ct --entrypoint tree \
+        --placement tab ${cwd:+--cwd "$cwd"} --focus
+fi
 exec "$herdr" plugin pane open \
     --plugin andree37.ct \
     --entrypoint tree \

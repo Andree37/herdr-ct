@@ -22,7 +22,7 @@ Bind a key in `~/.config/herdr/config.toml`:
 [[keys.command]]
 key = "prefix+t"
 type = "plugin_action"
-command = "andree37.ct.open"          # or andree37.ct.open-below
+command = "andree37.ct.open"          # or andree37.ct.open-below, andree37.ct.open-tab
 description = "code-tree beside this agent"
 ```
 
