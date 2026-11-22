@@ -1,10 +1,11 @@
 #!/bin/sh
-# Open `ct watch` beside the focused pane, in that pane's folder, so it finds the
-# project's .tree/ and its "tab" is the agent's tab.
+# Open the code-tree pane beside the focused pane, in that pane's folder, so it
+# follows the agent in that tab.
+export PATH="/opt/homebrew/bin:/usr/local/bin:$PATH"
 herdr="${HERDR_BIN_PATH:-herdr}"
 pane="$HERDR_PANE_ID"
-cwd=$("$herdr" pane get "$pane" 2>/dev/null | sed -n 's/.*"foreground_cwd":"\([^"]*\)".*/\1/p')
-[ -n "$cwd" ] || cwd=$("$herdr" pane get "$pane" 2>/dev/null | sed -n 's/.*"cwd":"\([^"]*\)".*/\1/p')
+# a real JSON parser, so folders with quotes or backslashes in their names work
+cwd=$("$herdr" pane get "$pane" 2>/dev/null | jq -r '.result.pane | .foreground_cwd // .cwd // empty' 2>/dev/null)
 if [ "$1" = tab ]; then
     exec "$herdr" plugin pane open --plugin andree37.ct --entrypoint tree \
         --placement tab ${cwd:+--cwd "$cwd"} --focus
