@@ -1,0 +1,24 @@
+id = "andree37.ct"
+name = "code-tree"
+version = "0.1.0"
+min_herdr_version = "0.9.0"
+description = "A live code-tree pane beside your agent: answer, accept, decide and talk to it about each node"
+platforms = ["linux", "macos"]
+
+# A split, so the tree sits next to the agent it belongs to and moves with the tab.
+[[panes]]
+id = "tree"
+title = "Tree"
+placement = "split"
+command = ["sh", "tree.sh"]
+
+# Keys can only target actions, so each action opens the pane next to the focused one.
+[[actions]]
+id = "open"
+title = "code-tree beside this agent"
+command = ["sh", "open.sh", "right"]
+
+[[actions]]
+id = "open-below"
+title = "code-tree below this agent"
+command = ["sh", "open.sh", "down"]
