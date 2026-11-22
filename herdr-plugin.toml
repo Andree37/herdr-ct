@@ -10,7 +10,8 @@ platforms = ["linux", "macos"]
 id = "tree"
 title = "Tree"
 placement = "split"
-command = ["sh", "tree.sh"]
+# Runs in the project's folder (see open.sh), so tree.sh is found through the plugin root.
+command = ["sh", "-c", "exec sh \"$HERDR_PLUGIN_ROOT/tree.sh\""]
 
 # Keys can only target actions, so each action opens the pane next to the focused one.
 [[actions]]
